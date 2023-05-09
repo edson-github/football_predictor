@@ -63,9 +63,9 @@ class TableCreator:
         self.ax.set_ylim(0, self.nrows)
 
     def add_main_text(self):
+        ha = "center"
         for i in range(self.nrows):
             for j, column in enumerate(self.columns):
-                ha = "center"
                 self.ax.annotate(
                     text=self.df[column].iloc[i],
                     xy=(self.positions[j], i + 0.5),
@@ -97,8 +97,8 @@ class TableCreator:
 
     def add_columns_names(self):
         column_names = ["Forecast", "Current", "Team", "Points"]
+        ha = "center"
         for index, col in enumerate(column_names):
-            ha = "center"
             self.ax.annotate(
                 text=col,
                 xy=(self.positions[index], self.nrows),
