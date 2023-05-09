@@ -10,7 +10,7 @@ class Processor:
         self.PREMIER_PATH = "data/results_premier/results.csv"
         self.ML_PATH = "data/ml"
         self.con = duckdb.connect()
-        self.records = list()
+        self.records = []
         self.df = None
         self.categories_to_export = None
         self.useful_columns = [
@@ -63,10 +63,7 @@ class Processor:
     def get_match_result(self, GF, GA):
         if GF == GA:
             return "D"
-        if GA > GF:
-            return "L"
-        else:
-            return "W"
+        return "L" if GA > GF else "W"
 
     def get_away_record(self, row):
         return {

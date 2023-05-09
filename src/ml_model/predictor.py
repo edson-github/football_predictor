@@ -15,7 +15,7 @@ class Predictor:
         self.categories = None
         self.future_matches = None
         self.standings = None
-        self.predicted_matches = list()
+        self.predicted_matches = []
 
     def execute(self):
         self.load_model()
@@ -97,10 +97,14 @@ class Predictor:
         return op.countOf(last_matches, result)
 
     def get_team_code(self, team):
-        for code, team_name in self.categories["team_codes"].items():
-            if team_name == team:
-                return code
-        return -1
+        return next(
+            (
+                code
+                for code, team_name in self.categories["team_codes"].items()
+                if team_name == team
+            ),
+            -1,
+        )
 
     def manage_prediction(self, prediction, home, away):
         if prediction == "Home":

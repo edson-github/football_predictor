@@ -39,9 +39,7 @@ class Trainer(BaseTrainer):
     def get_result_from_row(self, diff):
         if diff > 0:
             return 0
-        if diff == 0:
-            return 1
-        return 2
+        return 1 if diff == 0 else 2
 
     def split_database(self):
         self.features = self.database.drop(columns=self.not_usefull_columns)
@@ -76,12 +74,10 @@ class Trainer(BaseTrainer):
         self.model.fit(self.features, self.target)
 
     def generate_metadata(self):
-        features_importance = dict()
-
         importances = self.regressor.feature_importances_
-        for value, var in zip(importances, list(self.features)):
-            features_importance[var] = value
-
+        features_importance = {
+            var: value for value, var in zip(importances, list(self.features))
+        }
         self.metadata = {
             "model": self.model_name,
             "features_importance": features_importance,

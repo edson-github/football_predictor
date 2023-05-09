@@ -7,7 +7,7 @@ class Standings:
 
         self.database = None
         self.table_positions = None
-        self.teams = dict()
+        self.teams = {}
 
     def execute(self):
         self.load_fixture()
